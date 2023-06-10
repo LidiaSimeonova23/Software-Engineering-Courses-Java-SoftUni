@@ -2,7 +2,7 @@ package lecture5MultidimensionalArrays;
 
 import java.util.Scanner;
 
-public class P03IntersectionOfTwoMatrices {
+public class P03IntersectionOfTwoMatricesVersion1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
