@@ -2,7 +2,7 @@ package lecture5MultidimensionalArrays;
 
 import java.util.Scanner;
 
-public class P03IntersectionOfTwoMatricesVersion1 {
+public class P03IntersectionOfTwoMatricesVersion2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -37,24 +37,36 @@ public class P03IntersectionOfTwoMatricesVersion1 {
 
         }
 
+        //3. създаваме си трета матрица - от толкова редове и толкова колони, колкото има първата (и втората) матрици
+        char[][] thirdMatrix = new char[rowsNumber][columnsNumber];
 
-        //3. сравняваме първата и втората матрица - по условие ни е дадено, че имат еднакъв брой редове и еднакъв брой колони - следователно, тези неща няма да ги проверяваме
+        //4. сравняваме първата и втората матрица - по условие ни е дадено, че имат еднакъв брой редове и еднакъв брой колони - следователно, тези неща няма да ги проверяваме
         //ще итерираме по елементите на една от двете матрици (няма значение коя от двете) и ще сравняваме текущия елемент на едната с текущия елемент на другата ->
-        // и ако съвпадат, принтираме този елемент
-        // а ако са различни, принтираме '*' //"*"
+        // и ако съвпадат, присъединяваме този елемент към третата матрица
+        // а ако са различни, към третата матрица присъединяваме символа '*' //като символ, защото е матрица от символи
         for (int row = 0; row < rowsNumber; row++) {
             for (int column = 0; column < columnsNumber; column++) {
                 if (firstMatrix[row][column] == secondMatrix[row][column]) {           //ако текущият елемент от първата матрица е същият като текущия елемент от втората матрица
-                    System.out.print(firstMatrix[row][column] + " ");       //System.out.print(secondMatrix[row][column]);
+                    thirdMatrix[row][column] = firstMatrix[row][column];        //на текущия елемент от третата матрица му присвояваме като стойност текущия елемент от първата (или от втората) матрица
+                    //thirdMatrix[row][column] = secondMatrix[row][column];
                 } else {    //в противен случай (ако текущият елемент от първата матрица е различен от текущия елемент от втората матрица)
-                    System.out.print("* ");       //System.out.print("*" + " ");
+                    thirdMatrix[row][column] = '*';     //на текущия елемент от третата матрица му присвояваме като стойност символа (защото матрицата е от тип char) звездичка
                 }
             }
 
-            System.out.println();    //сваляме на нов ред (за да принтираме следващия ред с елементи на нов ред)
+            //System.out.println();    //сваляме на нов ред (за да принтираме следващия ред с елементи на нов ред)
+        }
+
+
+        //5. принтираме елементите на третата матрица
+        for (int row = 0; row < thirdMatrix.length; row++) {
+            for (int column = 0; column < thirdMatrix[row].length; column++) {
+                System.out.print(thirdMatrix[row][column] + " ");
+            }
+
+            System.out.println();
         }
 
     }
 }
-
 

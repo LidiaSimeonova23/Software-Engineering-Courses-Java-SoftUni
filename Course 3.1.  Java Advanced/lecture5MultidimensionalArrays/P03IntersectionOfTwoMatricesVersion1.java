@@ -57,4 +57,3 @@ public class P03IntersectionOfTwoMatricesVersion1 {
     }
 }
 
-
