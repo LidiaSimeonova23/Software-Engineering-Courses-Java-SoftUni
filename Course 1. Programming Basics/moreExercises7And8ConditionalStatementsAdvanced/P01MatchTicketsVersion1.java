@@ -1,0 +1,56 @@
+package moreExercises7And8ConditionalStatementsAdvanced;
+
+import java.util.Scanner;
+
+public class P01MatchTicketsVersion1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double availableBudget = Double.parseDouble(scanner.nextLine());        //бюджетът – реално число в интервала [1 000.00 ... 1 000 000.00]
+        String ticketType = scanner.nextLine();         //категорията – "VIP" или "Normal"
+        int numberOfPeopleInTheGroup = Integer.parseInt(scanner.nextLine());        //броят на хората в групата – цяло число в интервала [1 ... 200]
+
+        //2 вида билети: 	VIP – 499.99 лева    и   Normal – 249.99 лева.
+        double ticketPrice = 0;
+        double necessarySumForTickets = 0;
+        switch (ticketType) {
+            case "VIP":
+                ticketPrice = 499.99;
+                necessarySumForTickets = numberOfPeopleInTheGroup * ticketPrice;
+                break;
+            case "Normal":
+                ticketPrice = 249.99;
+                necessarySumForTickets = numberOfPeopleInTheGroup * ticketPrice;
+                break;
+        }
+
+        //процент от бюджета трябва да се задели за транспорт:
+        //Ако броят хора в групата е от 1 до 4 – 75% от бюджета.
+        //От 5 до 9 – 60% от бюджета.
+        //От 10 до 24 – 50% от бюджета.
+        //От 25 до 49 – 40% от бюджета.
+        //50 или повече – 25% от бюджета.
+
+        //на наличния бюджет ще му присвоим нова стойност (от първоначалния наличен бюджет ще извадим цената на транспорта)
+        if (numberOfPeopleInTheGroup >= 1 && numberOfPeopleInTheGroup <= 4) {
+            availableBudget = availableBudget - (availableBudget * 75 / 100);
+        } else if (numberOfPeopleInTheGroup <= 9) {
+            availableBudget = availableBudget - (availableBudget * 60 / 100);
+        } else if (numberOfPeopleInTheGroup <= 24) {
+            availableBudget = availableBudget - (availableBudget * 50 / 100);
+        } else if (numberOfPeopleInTheGroup <= 49) {
+            availableBudget = availableBudget - (availableBudget * 40 / 100);
+        } else {       //else if (numberOfPeopleInTheGroup >= 50)
+            availableBudget = availableBudget - (availableBudget * 25 / 100);
+        }
+
+
+        double differenceInMoney = Math.abs(availableBudget - necessarySumForTickets);
+        if (availableBudget >= necessarySumForTickets) {        //•	Ако бюджетът е достатъчен
+            System.out.printf("Yes! You have %.2f leva left.", differenceInMoney);
+        } else {
+            System.out.printf("Not enough money! You need %.2f leva.", differenceInMoney);
+        }
+
+    }
+}
